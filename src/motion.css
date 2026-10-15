@@ -1,0 +1,91 @@
+/* Small, tactile interactions complement the graphic, high-contrast layout. */
+.field input {
+  transition: background-color 180ms ease, border-color 180ms ease,
+              box-shadow 180ms ease, transform 180ms ease;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--accent);
+}
+
+.primary {
+  transition: color 200ms ease, background-color 200ms ease,
+              box-shadow 200ms ease, transform 200ms cubic-bezier(.2,.8,.2,1);
+}
+
+.primary:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+}
+
+.primary:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--accent);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  22% { transform: translateX(-8px); }
+  46% { transform: translateX(6px); }
+  70% { transform: translateX(-3px); }
+}
+
+.is-error { animation: shake 420ms cubic-bezier(.36,.07,.19,.97); }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner { animation: spin 800ms linear infinite; }
+
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.brand,
+.intro-copy,
+.intro-footer {
+  animation: intro-rise 700ms cubic-bezier(.2,.7,.2,1) both;
+}
+
+.intro-copy { animation-delay: 90ms; }
+.intro-footer { animation-delay: 180ms; }
+
+.browser-window {
+  animation: graphic-in 850ms cubic-bezier(.2,.8,.2,1) 180ms both;
+}
+
+@keyframes graphic-in {
+  from { opacity: 0; transform: translate(22px, 14px) rotate(1deg) scale(.88); }
+  to { opacity: 1; transform: translate(0) rotate(8deg) scale(1); }
+}
+
+.panel-enter-active, .panel-leave-active {
+  transition: opacity 260ms ease, transform 320ms cubic-bezier(.2,.8,.2,1);
+}
+
+.panel-enter-from {
+  opacity: 0; transform: translateY(14px);
+}
+
+.panel-leave-to {
+  opacity: 0; transform: translateY(-8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition: none;
+  }
+
+  .primary:hover:not(:disabled),
+  .primary:active:not(:disabled),
+  .panel-enter-from,
+  .panel-leave-to { transform: none; }
+}
